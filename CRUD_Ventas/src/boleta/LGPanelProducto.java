@@ -1,6 +1,7 @@
 
 package boleta;
 
+
 import datos.Productos;
 import datos.ProductosDatos;
 import java.awt.event.ActionEvent;
@@ -18,8 +19,10 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 
-public class SONYPanelProducto extends JFrame implements ProductosFactory{
-    public JPanel SONYproductoPanel = new JPanel();
+public class LGPanelProducto extends JFrame implements ProductosFactory {
+    
+    
+    public JPanel LGproductoPanel = new JPanel();
     
     int productoId=0;
     
@@ -30,32 +33,32 @@ public class SONYPanelProducto extends JFrame implements ProductosFactory{
     JTable productoTabla = new JTable(modelo2);
     JScrollPane productoSP = new JScrollPane();
     
-      JTextField productoTxtNombre;
-      JTextField productoTxtPrecio;
-    public SONYPanelProducto(){
+    JTextField productoTxtNombre;
+    JTextField productoTxtPrecio;
+    public LGPanelProducto(){
         
         this.setSize(450,600);
         
-      
-        SONYproductoPanel.setLayout(new BoxLayout(SONYproductoPanel, BoxLayout.Y_AXIS));
-        JLabel productoLblNombre = new JLabel("Ingrese el nombre del producto SONY: ");
+        
+        LGproductoPanel.setLayout(new BoxLayout(LGproductoPanel, BoxLayout.Y_AXIS));
+        JLabel productoLblNombre = new JLabel("Ingrese el nombre del producto LG: ");
          productoTxtNombre = new JTextField();
-        JLabel productoLblPrecio = new JLabel("Ingrese el precio del producto SONY: ");
+        JLabel productoLblPrecio = new JLabel("Ingrese el precio del producto LG: ");
          productoTxtPrecio = new JTextField();
         
         JButton botonAdd2 = new JButton("Agregar");
         JButton botonRemove2 = new JButton("Remove");
         
         productoSP.setViewportView(productoTabla);
-        SONYproductoPanel.add(productoLblNombre);
-        SONYproductoPanel.add(productoTxtNombre);
-        SONYproductoPanel.add(productoLblPrecio);
-        SONYproductoPanel.add(productoTxtPrecio);
-        SONYproductoPanel.add(botonAdd2);
-        SONYproductoPanel.add(botonRemove2);
-        SONYproductoPanel.add(productoSP);   
+        LGproductoPanel.add(productoLblNombre);
+        LGproductoPanel.add(productoTxtNombre);
+        LGproductoPanel.add(productoLblPrecio);
+        LGproductoPanel.add(productoTxtPrecio);
+        LGproductoPanel.add(botonAdd2);
+        LGproductoPanel.add(botonRemove2);
+        LGproductoPanel.add(productoSP);   
         
-        this.add(SONYproductoPanel);
+        this.add(LGproductoPanel);
         this.setLocationRelativeTo(null);
         botonAdd2.addActionListener(new ActionListener(){
             @Override
@@ -67,29 +70,29 @@ public class SONYPanelProducto extends JFrame implements ProductosFactory{
         botonRemove2.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                removerProducto();
+               removerProducto();
             }
         });
     }
-                
+   
     public void añadirProducto(){
         productoId++;
                 Productos p = new Productos(productoId,productoTxtNombre.getText(),productoTxtPrecio.getText());
                 productosDatos.crearProducto(p);
                 
                 productoTxtNombre.setText(""); 
-                productoTxtPrecio.setText("");  
+                productoTxtPrecio.setText(""); 
                 
                 List<Productos> miLista = productosDatos.getListaProductos();
                 productosMatriz = new String[miLista.size()][productosColumnas.length];
                 for(int i=0;i<miLista.size();i++){
                     productosMatriz[i][0]= miLista.get(i).getId() + "";
-                    productosMatriz[i][1]= miLista.get(i).getNombreProducto() + "(SONY)";
+                    productosMatriz[i][1]= miLista.get(i).getNombreProducto() + "(LG)";
                     productosMatriz[i][2]= miLista.get(i).getPrecioProducto() + "";
                 }
                 modelo2 = new DefaultTableModel(productosMatriz, productosColumnas);
                 productoTabla = new JTable(modelo2); 
-                productoSP.setViewportView(productoTabla); 
+                productoSP.setViewportView(productoTabla);
     }
 
     public void removerProducto(){
@@ -110,4 +113,5 @@ public class SONYPanelProducto extends JFrame implements ProductosFactory{
                     JOptionPane.showMessageDialog(null, "La fila seleccionada fue borrada satisfactoriamente");
                 }
     }
+    
 }

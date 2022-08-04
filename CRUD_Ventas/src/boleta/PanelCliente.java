@@ -17,10 +17,12 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-public class PanelCliente extends JFrame{
-    public JPanel clientePanel = new JPanel();
+public class PanelCliente extends JFrame {
+    public  JPanel clientePanel = new JPanel();
+    
     
     int clienteId=0;
+    
     ClienteDatos clienteDatos=new ClienteDatos();
     String[] clienteColumnas = {"ID", "Nombre", "Documento"};
     String[][] clienteMatriz = new String[0][clienteColumnas.length];
@@ -29,11 +31,13 @@ public class PanelCliente extends JFrame{
     JScrollPane clienteSP = new JScrollPane();
     
     public PanelCliente(){
-        this.setSize(450, 600);
+        
+        
+        this.setSize(450,600);
         this.setLocationRelativeTo(null);
-        //CRUD de contactos
+        
         clientePanel.setLayout(new BoxLayout(clientePanel,BoxLayout.Y_AXIS));
-        JLabel clienteLblNombre = new JLabel("Ingrese el nombre del contacto : ");
+        JLabel clienteLblNombre = new JLabel("Ingrese el nombre del contacto LG: ");
         JTextField clienteTxtNombre = new JTextField();
         JLabel clienteLblDocumento = new JLabel("Ingrese el numero del documento de identidad : ");
         JTextField clienteTxtDocumento = new JTextField();
@@ -49,16 +53,18 @@ public class PanelCliente extends JFrame{
         clientePanel.add(botonAdd);
         clientePanel.add(botonRemove);
         clientePanel.add(clienteSP);
+        
         this.add(clientePanel);
         
         botonAdd.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e){
+           @Override
+           public void actionPerformed(ActionEvent e){
                clienteId++;
                Cliente c = new Cliente(clienteId,clienteTxtNombre.getText(),clienteTxtDocumento.getText());
+               
                clienteDatos.crearCliente(c);
-               clienteTxtNombre.setText(""); //Limpiamos la entrada para el nombre del cliente
-               clienteTxtDocumento.setText(""); //Limpieando la entrada para el documento de identidad
+               clienteTxtNombre.setText("");
+               clienteTxtDocumento.setText("");
                
                
                List<Cliente> miLista = clienteDatos.getListaClientes();
@@ -68,17 +74,17 @@ public class PanelCliente extends JFrame{
                    clienteMatriz[i][1] = miLista.get(i).getNombreCliente() + "";
                    clienteMatriz[i][2] = miLista.get(i).getNumeroDocumento() + "";
                }
-               //Volvemos a cargar cada tabla
+               
                modelo = new DefaultTableModel(clienteMatriz,clienteColumnas);
-               contactoTabla = new JTable(modelo); //Actualizamos la tabla
-               clienteSP.setViewportView(contactoTabla); //Actualizamos de nuevo
+               contactoTabla = new JTable(modelo);
+               clienteSP.setViewportView(contactoTabla); 
            } 
         });
         
         botonRemove.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                //Chequearemos para la fila seleccionada
+              
                 if(contactoTabla.getSelectedRow() != -1){
                     String ids = null;
                     int[] fila = contactoTabla.getSelectedRows();
@@ -87,7 +93,7 @@ public class PanelCliente extends JFrame{
                     int id =  Integer.parseInt(ids);
                     clienteTxtNombre.setText(""+id);
                     
-                    //Removemos la fila seleccionada del modelo
+                   
                     modelo.removeRow(contactoTabla.getSelectedRow());
                     try{
                         clienteDatos.borrar(id);
