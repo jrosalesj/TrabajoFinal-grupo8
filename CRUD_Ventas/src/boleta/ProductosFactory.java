@@ -2,11 +2,6 @@
 package boleta;
 
 interface ProductosFactory {
-    
-    void añadirProducto();
-        
-    
+    void agregarProducto();
     void removerProducto();
-        
-    
 }

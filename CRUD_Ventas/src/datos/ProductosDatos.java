@@ -11,9 +11,10 @@ public class ProductosDatos {
     }
     
     public void crearProducto(Productos p){
-        listaProductos.add(p); 
+        listaProductos.add(p);
         System.out.println("El producto "+p.getNombreProducto()+" fue añadido.");
     }
+    
     public void borrar(Productos p){
         listaProductos.remove(p);
         System.out.println("El producto "+p.getNombreProducto()+" fue removido.");

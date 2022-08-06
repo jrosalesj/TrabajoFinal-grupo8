@@ -10,12 +10,13 @@ public class ClienteDatos {
         return listaClientes;
     }
     
-      public void crearCliente(Cliente c){
+    public void crearCliente(Cliente c){
         listaClientes.add(c);
         System.out.println("El cliente "+c.getNombreCliente()+" fue añadido.");
     }
+    
     public void borrar(Cliente c){
-        listaClientes.remove(c); 
+        listaClientes.remove(c);
         System.out.println("El cliente "+c.getNombreCliente()+" fue quitado.");
     }
     
@@ -26,7 +27,6 @@ public class ClienteDatos {
                 System.out.println("Borrando cliente : "+c.getId()+"\t"+c.getNombreCliente());
                 try{
                     listaClientes.remove(c);
-                    
                 }catch(java.util.ConcurrentModificationException e){
                     System.out.println("No concuerda con lo ingresado... "+e);
                 }
